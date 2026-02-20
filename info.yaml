@@ -45,7 +45,7 @@ pinout:
 
   # Bidirectional pins
   uio[0]: "go (input)"
-  uio[1]: "finish (output)"
+  uio[1]: "finish (input)"
   uio[2]: "error (output)"
   uio[3]: ""
   uio[4]: ""

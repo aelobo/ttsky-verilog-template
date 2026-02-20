@@ -27,9 +27,9 @@ module tt_um_top (
 
     assign uo_out = range_out;
 
-    assign uio_out[0]   = 1'b0;
-    assign uio_out[1]   = finish_out;
-    assign uio_out[2]   = error_out;
+    assign uio_out[0]   = 1'b0;       
+    assign uio_out[1]   = 1'b0;       // Pin 1 is now an input, so drive 0
+    assign uio_out[2]   = error_out;  // Pin 2 outputs 'error'
     assign uio_out[7:3] = 5'b0;
 
     assign uio_oe = 8'b0000_0110;
@@ -38,11 +38,11 @@ module tt_um_top (
                                 .clock(clk),
                                 .reset(~rst_n),
                                 .go(uio_in[0]),
-                                .finish(finish_out),
+                                .finish(uio_in[1]),
                                 .range(range_out),
                                 .error(error_out));
 
     // List all unused inputs to prevent warnings
-    wire _unused = &{ena, uio_in[7:1], 1'b0};
+    wire _unused = &{ena, uio_in[7:2], 1'b0};
 
 endmodule
