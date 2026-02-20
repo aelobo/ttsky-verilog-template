@@ -22,7 +22,6 @@ module tt_um_top (
     assign uio_oe  = 0;
 
     wire [7:0] range_out;
-    wire       finish_out;
     wire       error_out;
 
     assign uo_out = range_out;

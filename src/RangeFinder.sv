@@ -64,7 +64,7 @@ module RangeFinder
          high_q <= '0; 
       end else begin
          state <= next_state;
-                  case (state)
+         case (state)
             START: begin
                if (go & !finish) begin
                   low_q  <= data_in;
@@ -77,6 +77,9 @@ module RangeFinder
             RUN: begin
                if (data_in < low_q)  low_q  <= data_in;
                if (data_in > high_q) high_q <= data_in;
+            end
+      
+            default: begin 
             end
          endcase
       end
