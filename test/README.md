@@ -1,47 +1,36 @@
-# Sample testbench for a Tiny Tapeout project
+# TinyPomodoro — Pomodoro Timer, Clock & Date Display
 
-This is a sample testbench for a Tiny Tapeout project. It uses [cocotb](https://docs.cocotb.org/en/stable/) to drive the DUT and check the outputs.
-See below to get started or for more information, check the [website](https://tinytapeout.com/hdl/testing/).
+### How it works
 
-## Setting up
+- 3-mode timer and clock system driven by 50MHz clock
+- Displays output on external MAX7219 8-digit 7-segment display via SPI
+- 4 breadboard buttons for input
 
-1. Edit [Makefile](Makefile) and modify `PROJECT_SOURCES` to point to your Verilog files.
-2. Edit [tb.v](tb.v) and replace `tt_um_example` with your module name.
+#### External hardware
 
-## How to run
+- MAX7219 8-digit 7-segment LED display
+- Push buttons (×4)
 
-To run the RTL simulation:
 
-```sh
-make -B
-```
+#### Modes
 
-To run gatelevel simulation, first harden your project and copy `../runs/wokwi/results/final/verilog/gl/{your_module_name}.v` to `gate_level_netlist.v`.
+The design has three display modes, cycled with `btn_right`:
 
-Then run:
+| LED[1:0] | Mode | Display format |
+|----------|------|----------------|
+| `00` | CLOCK | `HH MM SS --` |
+| `01` | DATE | `DD - MM - -- --` |
+| `10` | POMODORO | `-- -- MM SS -- -- ` |
 
-```sh
-make -B GATES=yes
-```
 
-If you wish to save the waveform in VCD format instead of FST format, edit tb.v to use `$dumpfile("tb.vcd");` and then run:
+#### Button Routing
 
-```sh
-make -B FST=
-```
+| Button | Outside setup | Inside setup |
+|--------|--------------|--------------|
+| `btn_left`  | Enter setup | Exit setup and save |
+| `btn_right` | Cycle mode | Cycle to next field |
+| `btn_up`    | Start/pause pomodoro | Increment selected field |
+| `btn_down`  | Reset pomodoro | Decrement selected field |
 
-This will generate `tb.vcd` instead of `tb.fst`.
 
-## How to view the waveform file
 
-Using GTKWave
-
-```sh
-gtkwave tb.fst tb.gtkw
-```
-
-Using Surfer
-
-```sh
-surfer tb.fst
-```
