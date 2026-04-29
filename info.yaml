@@ -22,7 +22,7 @@ project:
     - "clk_divider.sv" 
     - "sec_counter.sv" 
     - "min_counter.sv" 
-    - "hour_counter.sv "
+    - "hour_counter.sv"
     - "day_counter.sv" 
     - "month_counter.sv" 
     - "rollover.sv" 
