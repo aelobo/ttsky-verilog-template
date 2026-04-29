@@ -79,7 +79,7 @@ def get_spi_cs(dut):
 @cocotb.test()
 async def test_reset_state(dut):
     """after reset -> should be in CLOCK mode."""
-    clock = Clock(dut.clk, CLK_PERIOD_NS, unit="ns")
+    clock = Clock(dut.clk, CLK_PERIOD_NS, "ns")
     cocotb.start_soon(clock.start())
 
     await reset(dut)
@@ -95,7 +95,7 @@ async def test_reset_state(dut):
 @cocotb.test()
 async def test_mode_cycle(dut):
     """btn_right should cycle CLOCK(0) -> DATE(1) -> POMODORO(2) -> CLOCK(0)"""
-    clock = Clock(dut.clk, CLK_PERIOD_NS, unit="ns")
+    clock = Clock(dut.clk, CLK_PERIOD_NS, "ns")
     cocotb.start_soon(clock.start())
 
     await reset(dut)
@@ -120,7 +120,7 @@ async def test_mode_cycle(dut):
 @cocotb.test()
 async def test_enter_exit_setup(dut):
     """btn_left should enter setup (LED[2]=1) and pressing again should exit (LED[2]=0)"""
-    clock = Clock(dut.clk, CLK_PERIOD_NS, unit="ns")
+    clock = Clock(dut.clk, CLK_PERIOD_NS, "ns")
     cocotb.start_soon(clock.start())
 
     await reset(dut)
@@ -144,7 +144,7 @@ async def test_enter_exit_setup(dut):
 @cocotb.test()
 async def test_field_cycle_in_setup(dut):
     """inside clock setup, btn_right should cycle MIN(0) -> HOUR(1) -> MIN(0)"""
-    clock = Clock(dut.clk, CLK_PERIOD_NS, unit="ns")
+    clock = Clock(dut.clk, CLK_PERIOD_NS, "ns")
     cocotb.start_soon(clock.start())
 
     await reset(dut)
@@ -180,7 +180,7 @@ async def test_field_cycle_in_setup(dut):
 @cocotb.test()
 async def test_date_field_cycle(dut):
     """in DATE setup, btn_right should cycle DAY(2) -> MON(3) -> DAY(2)"""
-    clock = Clock(dut.clk, CLK_PERIOD_NS, unit="ns")
+    clock = Clock(dut.clk, CLK_PERIOD_NS, "ns")
     cocotb.start_soon(clock.start())
 
     await reset(dut)
@@ -215,7 +215,7 @@ async def test_date_field_cycle(dut):
 @cocotb.test()
 async def test_uio_oe(dut):
     """uio_oe[2:0] should be 3'b111"""
-    clock = Clock(dut.clk, CLK_PERIOD_NS, unit="ns")
+    clock = Clock(dut.clk, CLK_PERIOD_NS, "ns")
     cocotb.start_soon(clock.start())
 
     await reset(dut)
@@ -232,7 +232,7 @@ async def test_uio_oe(dut):
 @cocotb.test()
 async def test_mode_blocked_in_setup(dut):
     """btn_right shouldn't change display_mode while in setup"""
-    clock = Clock(dut.clk, CLK_PERIOD_NS, unit="ns")
+    clock = Clock(dut.clk, CLK_PERIOD_NS, "ns")
     cocotb.start_soon(clock.start())
 
     await reset(dut)
