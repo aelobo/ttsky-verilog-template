@@ -35,7 +35,7 @@ The design has three display modes, cycled with `btn_right`:
 ### SPI Display Driver
 
 - SPI drivers sends 16-bit frames to MAX7219 chip
-- Based on logic from https://github.com/cerkit/max7219TinyFPGA
+- Based on logic from [max7219TinyFPGA](https://github.com/cerkit/max7219TinyFPGA)
 - Binary counter values are converted to BCD using lookup-tables rather than dividers
 
 ### Button Routing

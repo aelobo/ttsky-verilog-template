@@ -1,42 +1,40 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
+# TinyPomodoro — Pomodoro Timer, Clock & Date Display
 
-# Tiny Tapeout Verilog Project Template
 
-- [Read the documentation for project](docs/info.md)
+### Overview
+Date and time clock system with Pomodoro timer. Peripherals include 4 push buttons and MAX7219 8-digit 7-segment display. Push buttons control system modes and setup of date and time. RTL overview and peripheral setup found in [docs/info.md](https://github.com/aelobo/ttsky-verilog-template/blob/main/docs/info.md) 
 
-## What is Tiny Tapeout?
+### How it works
 
-Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital and analog designs manufactured on a real chip.
+- 3-mode timer and clock system driven by 50MHz clock
+- Displays output on external MAX7219 8-digit 7-segment display via SPI
+- 4 breadboard buttons for input
 
-To learn more and get started, visit https://tinytapeout.com.
+#### External hardware
 
-## Set up your Verilog project
+- MAX7219 8-digit 7-segment LED display
+- Push buttons (×4)
 
-1. Add your Verilog files to the `src` folder.
-2. Edit the [info.yaml](info.yaml) and update information about your project, paying special attention to the `source_files` and `top_module` properties. If you are upgrading an existing Tiny Tapeout project, check out our [online info.yaml migration tool](https://tinytapeout.github.io/tt-yaml-upgrade-tool/).
-3. Edit [docs/info.md](docs/info.md) and add a description of your project.
-4. Adapt the testbench to your design. See [test/README.md](test/README.md) for more information.
 
-The GitHub action will automatically build the ASIC files using [LibreLane](https://www.zerotoasiccourse.com/terminology/librelane/).
+#### Modes
 
-## Enable GitHub actions to build the results page
+The design has three display modes, cycled with `btn_right`:
 
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
+| LED[1:0] | Mode | Display format |
+|----------|------|----------------|
+| `00` | CLOCK | `HH MM SS --` |
+| `01` | DATE | `DD - MM - -- --` |
+| `10` | POMODORO | `-- -- MM SS -- -- ` |
 
-## Resources
 
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://tinytapeout.com/discord)
-- [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
+#### Button Routing
 
-## What next?
+| Button | Outside setup | Inside setup |
+|--------|--------------|--------------|
+| `btn_left`  | Enter setup | Exit setup and save |
+| `btn_right` | Cycle mode | Cycle to next field |
+| `btn_up`    | Start/pause pomodoro | Increment selected field |
+| `btn_down`  | Reset pomodoro | Decrement selected field |
 
-- [Submit your design to the next shuttle](https://app.tinytapeout.com/).
-- Edit [this README](README.md) and explain your design, how it works, and how to test it.
-- Share your project on your social network of choice:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@tinytapeout](https://twitter.com/tinytapeout)
-  - Bluesky [@tinytapeout.com](https://bsky.app/profile/tinytapeout.com)
+
+
